@@ -1,3 +1,15 @@
+/* VARIABLES */
+
+:root {
+  /* Color Theme Swatches in RGBA */
+  --CFColors-darkGrey-rgba: rgba(33, 33, 33, 1);
+  --CFColors-grayBlue-rgba: rgba(44, 66, 81, .5);
+  --CfColors-darkBlue-rgba: rgba(0, 115, 171, .5);
+  --CFColors-Orange-rgba: rgba(247, 148, 29, .5);
+  --CFColors-ltGrey-rgba: rgba(223, 227, 228, .5);
+  --CFColors-Black-rgba: rgba(0, 0, 0, 1);
+}
+/* INIT SETUP */
 *{
   padding: 0;
   margin: 0;
@@ -8,54 +20,65 @@
 }
 body{
   box-sizing: border-box;
+  height: 100%;
+  background-color: cadetblue; 
+  background: linear-gradient(to right, rgb(121, 145, 187), rgb(174, 201, 248), rgb(148, 186, 252)); 
 }
 
+/*============= navbar============== */
+nav .wpTitle {
+  position: fixed;
+  font-family: titling-gothic-fb-wide, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.5em;
+  text-align: center;
+  background: linear-gradient(to right, rgb(121, 145, 187), rgb(174, 201, 248), rgb(148, 186, 252)); 
+  width: 100vw;
+  color: var(--CFColors-darkGrey-rgba);
+  -webkit-text-fill-color: white;
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: var(--CFColors-darkGrey-rgba);
+}
+
+/* Body */
 main{
- padding: 0 10em;
- height: 100%;
+  padding: 0 3em;
+  height: 100%;
+ }
+.wpBackground {
+  margin-top: 1px;
+  height: 100vh;
+  min-height: 500px;
+  background: url(/images/WeatherPrpBG.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
 }
-.nav-container{
-    display: flex;
-    justify-content: space-between;
-    height: 100px;
-    padding: 0 10em;
-    background-color: rgb(63, 67, 73);
-}
-.pad{
-  padding: 2em;
-  overflow: hidden;
-}
-ul{
+.row-content{
   display: flex;
-  padding: 25px;
-  justify-content: space-between;
+  flex-direction: row-reverse;
+  flex-flow: nowrap;
+  flex-wrap: wrap;
+  border-radius: 5px;
 }
-li{
-  list-style-type: none;
-  padding: 5px 9px;
-  margin-left: 35px;
-  border-radius: 10px;
-  box-shadow: 5px 1px 0px rgba(63, 67, 73,0.5);
-}
-li:focus,
-li:hover a{
-  color: rgb(67, 67, 223);
-}
-li.active{
-  border: 1px solid blue;
-}
-a{
-  text-decoration: none;
-  font-weight: bold;
+#wpCurrent {
+  background-color: var(--CFColors-grayBlue-rgba);
+  color: white;
+  resize: vertical;
+  width: 60%;
 }
 .search-bar{
-  position: absolute;
-  top: 11em;
-  width: 90%;
+  position: relative;
+  top: 81px;
+  width: 87%;
 }
 
 .search-bar input{
-  width: 83%;
+  width: 53%;
   padding: 10px 15px;
   border: none;
   outline: none;
@@ -77,40 +100,40 @@ a{
   position: relative;
   right: 78px;
 }
-
-.details-container{
+.weather-details{
+  margin-top: 91px;
+}
+.navbar-first{
   display: flex;
   flex-wrap: wrap;
-  border-radius: 10px;
-  margin-top: 10em;
-  width: 100%;
+  padding: 75px 10px 0 10px;
+  justify-content: space-between;
 }
-
-.details-container article:nth-child(odd){
-  background-color: rgba(63, 67, 73,0.3);
-}
-.details-container .navbar{
-  padding: 10px;
-  box-shadow: 5px 5px 5px rgb(81, 86, 94);
-}
-.details-container article:first-of-type{
-  width: 250px;
-}
-.navbar:first-of-type{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+#weatherIcon {
+  max-width: 100%;
+  width: 301px;
+  height: auto;
 }
 .date{
-  font-size: 16px;
+  padding-right: 16px;
 }
 .city{
   padding: 10px;
   font-size: 30px;
   font-weight: 600;
   text-shadow: 2px 10px rgba(0,0,0,0.4);
+  text-align: center;
+  text-transform:uppercase ;
+}
+.timezone{
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  text-shadow: 2px 10px rgba(0,0,0,0.4);
+  text-align: center;
 }
 .temp{
-  font-size: 103px;
+  font-size: 90px;
   font-weight: 900;
   text-shadow: 2px 10px rgba(0,0,0,0.6);
 }
@@ -124,29 +147,162 @@ a{
   text-shadow: 0px 3px rgba(0,0,0,0.4);
 }
 
-.temp-range{
+.timezone{
   font-size: 24px;
   font-weight: 500;
   text-shadow: 0px 4px rgba(0,0,0,0.4);
 }
+table{
+  border-collapse: collapse;
+  width:-webkit-fill-available;
+}
+td, th {
+  border: 1px solid rgba(0, 115, 171, .5);
+  padding: 8px;
+  text-align: center;
+}
 
+tr:nth-child(even){
+  background-color: rgba(223, 227, 228, .5);
+}
+
+.details{
+  text-transform: uppercase;
+  text-align: center;
+}
+.error{
+  position: absolute;
+  top: 51px;
+  visibility: hiden;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  font-style: oblique;
+  transition:.5s all ease-in-out;
+  transform: scale(1, 1);
+}
+
+.row-content-two{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.more-details{
+  /* width: 40%; */
+}
+.daily-hourly h1{
+  background-color: var( --CfColors-darkBlue-rgba);
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+.tab {
+  overflow: hidden;
+  border-bottom: 4px solid #fff;
+  outline: none;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: var(--CFColors-Orange-rgba);
+}
+
+/* Create an active/current tablink class */
+.tab button.active{
+  background-color: var(--CFColors-Orange-rgba);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.tabcontent {
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  #wpTitle {
+      font-size: 1.5em;
+  }
+  #wpCurrent,
+  #wpConditions {
+      font-size: 1.5em;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {
+  #wpTitle {
+      font-size: 2em;
+  }
+
+  #wpCurrent,
+  #wpConditions {
+      font-size: 1.5em;
+  }
+}
+@media all and (max-width: 850px){
+  .row-content{
+    margin-top: 97px;
+    /* width: max-content; */
+    flex-direction: column-reverse;
+  }
+  .temp{
+    font-size: 2em;
+  }
+  .navbar-first{
+    padding-top: 45px;
+  }
+  .weather-details{
+    margin-top: 51px;
+  } 
+  .search-bar{
+    width: 100%;
+    top: 41px;
+  }
+}
 
 @media all and (max-width:780px){
   .nav-container{
     padding: 0 2em;
   }
   main{
-    padding: 0 50px;
+    padding: 0 20px;
   }
-
+  .current{
+    text-align: center;
+  }
 }
 @media all and (max-width: 700px){
+  .row-content{
+    width: 123vw;
+  }
   ul{
     display: none;
   }
-  .search-bar{
-    width: 60%;
-  }
+  
   .search-bar .btn{
     display: none;
   }

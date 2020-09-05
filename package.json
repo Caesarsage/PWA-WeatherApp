@@ -11,7 +11,6 @@
   "author": "caesarsage",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.3.0",
-    "live-server": "^1.2.1"
+    "lite-server": "^2.3.0"
   }
 }

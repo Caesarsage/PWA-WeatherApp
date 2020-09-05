@@ -5,70 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=7">
     <meta name="description" content="weather application">
+        
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <title>Weather Application</title>
 </head>
 <body>
   <nav>
-    <section class="nav-container">
-        <figure  class="pad">
-            <img src="" alt="logo" >
-            <header>GetWeatherInfo</header>
-            <p></p>
-        </figure>
-        <div class="nav-links">
-            <ul>
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Live Images</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </section>
+    <header class="wpTitle">WEATHER ULTIMATE</header>
   </nav>
-  <main>
-    <section class="main-container">
-        <span class="search-bar">
+  <br>
+  <div class="wpBackground">
+    <main>
+      <div class="row-content">
+        <section class="main-container row-one" id="wpCurrent">
+          <p class="error">FindOut Your Desire Location Weather's Condition</p>
+          <span class="search-bar">
             <input type="text" name="search" id="search" placeholder="Find your location..."
-                aria-label="Find your location">
+              aria-label="Find your location">
             <botton class="btn" id="btn">Find</botton>
-        </span>
-    </section>
-    <section class="details-container">
-      <article >
-        <div class="navbar navbar-fisrt">
-          <header class="day">Monday</header>
-          <div class="date">1 Sept, 2020</div>
-        </div>
-        <h1 class="city">New York,US</h1>
-        <div class="current">
-          <div class="temp">20<span>c</span></div>
-          <!-- <i class="fa fa.home fa-lg"></i> -->
-          <div class="weather">Clear</div>
-          <div class="temp-range">13c/16c</div>
-        </div>
-      </article>
+          </span>
+          <div>
+            
+          </div>
+          <article class="weather-details">
+            <div class="navbar navbar-first">
+              <header class="day">Monday</header>
+              <div class="date"> 1 Sept, 2020</div>
+            </div>
+            <h1 class="city">Benin City <br>
+            </h1>
+            <div class="timezone">Africa/Lagos</div>
+            <div class="current">
+              <div class="temp"> 20 <span> &deg;c </span></div>
+              <div class="weather">Clear</div>
+              
+            </div>
+            <hr>
+            <h3 class="details">
+              clear sky
+            </h3>
+          </article>
+        </section>
+        <section>
+          <div class="row-two" >
+            <img id="weatherIcon" class="img-fluid weatherIcon" src="/images/MostlySunny.png">
+          </div>
+        </section>
+      </div>
+      <div class="row-content-two">
+        <section class="more-details">
+          <table>
+            <thead>
+              <tr>
+                <th>Precipitation</th>
+                <th>Humidity</th>
+                <th>Winds</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="pre">232%</td>
+                <td class="hum">666%</td>
+                <td class="wind">777mph</td>
+              </tr>
+            </tbody>
+          </table>
+          </section>
 
-      <!-- <article>
-        <div class="navbar">
-          <header>Monday</header>
-        </div>
-      </article>
-      <article>
-        <div class="navbar">
-          <header>Monday</header>
-        </div>
-      </article>
-      <article>
-        <div class="navbar">
-          <header>Monday</header>
-        </div>
-      </article>        -->
-    </section>
-  </main>
+        <section class="daily-hourly">
+          <h1>Get Weakly and Daily Forecast here</h1>
+            <div class="tab">
+              <button class="tablinks" onclick="openCity(event, 'Hourly')">Hourly</button>
+              <button class="tablinks" onclick="openCity(event, 'Weekly')">Weakly</button>
+            </div>
+            
+            <!-- Tab content -->
+            <div id="Hourly" class="tabcontent">
+              <h3>Hourly</h3>
+              <table>
 
+              </table>
+            </div>
+            
+            <div id="Weekly" class="tabcontent">
+              <h3>Weekly</h3>
+              <table>
 
+              </table>
+            </div>
+        </section>
+      </div>  
+    </main>
+  </div>
+  <footer>
+
+  </footer>
   <script src="js/script.js"></script>
 </body>
 </html>
