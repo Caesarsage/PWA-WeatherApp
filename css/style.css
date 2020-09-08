@@ -51,7 +51,7 @@ main{
   margin-top: 1px;
   height: 100vh;
   min-height: 500px;
-  background: url(/images/WeatherPrpBG.png) no-repeat center center fixed;
+  background: url(/assets/images/WeatherPrpBG.png) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

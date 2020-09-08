@@ -1,4 +1,5 @@
 'use strict'
+import { api } from "./api";
 
 const searchBar = document.getElementById('search');
 const findBtn = document.querySelector('.btn');
@@ -15,28 +16,18 @@ const hum = document.querySelector('.hum');
 const wind = document.querySelector('.wind');
 
 let iconValue = {
-  CLEAR: 'clear sky',
-  FEW_CLOUD: 'few cloud',
-  SCATTERED_CLOUDS: 'scattered clouds',
-  BROKEN_CLOUDS: 'broken clouds',
+  CLEAR: 'day-sunny',
+  FEW_CLOUD: 'day-cloud',
+  SCATTERED_CLOUDS: 'night-alt-clouds',
+  BROKEN_CLOUDS: 'day-clouds',
   SHOWER_RAIN: 'shower rain',
-  RAIN : 'rain',
-  THUNDERSTORM : 'thunderstorm',
+  RAIN : 'day-rain',
+  THUNDERSTORM : 'day-thunderstorm',
   SNOW : 'snow',
-  MIST: 'mist'
+  MIST: 'fog'
 }
-
 
 let counter = 0 ;
-
-const api = {
-  key: '8ff7422f47efdacccce3e0c8dac5bbed',
-  base: 'https://api.openweathermap.org/data/2.5/',
-  key2: 'bbeb2ada24fec4',
-  base2: 'https://us1.locationiq.com/v1/search.php?'
-}
-
-
 
 searchBar.addEventListener('keypress', setQuery, false);
 
@@ -116,33 +107,67 @@ function displayResults(weather){
   document.getElementById('weatherIcon').src = getICON(icon)
 
  
-  dailyAndHourlyForecast(weather);
- 
+  dailyForecast(weather);
+  const daily = document.getElementById('dailyForecast').dailyForecast(weather.hourly);
+  const weekly =  document.getElementById('weeklyForecast').hourlyForecast(weather.daily);
+
 }
 
-function dailyAndHourlyForecast(weatherF) {
-  console.log(weatherF);
+//LOCAL STORAGE
+
+
+function dailyForecast(fcData) {
+  let resultHTML = `<tr>
+    <th>Day</th>
+      <th>Humidity</th>
+      <th>Weather</th>
+      <th>Temperature</th>
+      <th>Wind speed</th>
+  </tr>`
+
+  rowCount = fcData.length;
+  if (rowCount > 8) {
+    rowCount = 8;
+  }
+
+  for (let i = 0; i < rowCount.length; i++) {
+    let ts = new Date(fcData[i]);
+    
+  }
+
+  let hours = ts.getHours();
+  if (hours > 0 && hours<= 12 ) {
+    timeValue = -- + hours;
+  } else {
+    
+  }
+
+  return resultHTML;
+}
+
+function hourlyForecast(fcData) {
+  
 }
 
 function getICON(icon) {
   switch (icon) {
     case iconValue.CLEAR:
-      return 'images/sunnyDay.png'
+      return 'assets/images/sunnyDay.png'
     case iconValue.SCATTERED_CLOUDS:
     case iconValue.BROKEN_CLOUDS:
-      return 'images/CloudyMoon.png'
+      return 'assets/images/CloudyMoon.png'
     case iconValue.SNOW:
-      return 'images/Snow.png'
+      return 'assets/images/Snow.png'
     case iconValue.THUNDERSTORM:
     case iconValue.RAIN:
-      return 'images/Rain.png'
+      return 'assets/images/Rain.png'
     case iconValue.FEW_CLOUD:
-      return 'images/CloudyMoon.png'
+      return 'assets/images/CloudyMoon.png'
     // case iconValue.CLEAR:
     //   return 'image/sunnyDay.png'
     //   break;
     default:
-     return 'images/Rain.png'
+     return 'assets/images/Rain.png'
   }
 }
 
