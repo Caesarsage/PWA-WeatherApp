@@ -1,10 +1,13 @@
-const staticCacheName = 'site-static'
+const staticCacheName = 'site-static';
+const assets = [
+    '/'
+];
 
 //install service worker
 self.addEventListener('install', evt =>{  
     //console.log('service worker have been install');
     caches.open(staticCacheName).then(cache => {
-        cache.add()
+        cache.addAll()
     })
 });         
 

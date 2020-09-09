@@ -1,5 +1,5 @@
 'use strict'
-import { api } from "./api";
+// import { api } from "./api";
 
 const searchBar = document.getElementById('search');
 const findBtn = document.querySelector('.btn');
@@ -27,7 +27,12 @@ let iconValue = {
   MIST: 'fog'
 }
 
-let counter = 0 ;
+const api ={
+  key: '8ff7422f47efdacccce3e0c8dac5bbed',
+  base: 'https://api.openweathermap.org/data/2.5/',
+  key2: 'bbeb2ada24fec4',
+  base2: 'https://us1.locationiq.com/v1/search.php?'
+}
 
 searchBar.addEventListener('keypress', setQuery, false);
 
@@ -48,12 +53,8 @@ function getLonLat(query) {
     })
     .then(
       getForecast,
-      erroMessage.style.display = 'none',
-      city.innerText = query
     ).catch( err => {
-      console.log(err),
-      erroMessage.innerText = 'Sorry an error occur!!!, try again',
-      city.style.display = 'none'
+      console.log(err)
     }
   )
 }
@@ -61,19 +62,21 @@ function getLonLat(query) {
 function getForecast(forecast) {
   const lat = forecast[0].lat;
   const lon = forecast[0].lon;
+  const displayName = forecast[0].display_name;
   console.log( ' ' + lat +' ' + lon);
-  getResults(lat,lon)
+  getResults(lat,lon, displayName)
 
 }
 
-function getResults(lat,lon){
+function getResults(lat,lon, displayName){
   // api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
   fetch(`${api.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely&appid=${api.key}`)
     .then(weather => {
        return weather.json();
     })
     .then(
-      displayResults
+      displayResults,
+      city.innerText = displayName
     ).catch( err=>{
       console.log(err) 
     });
@@ -99,54 +102,99 @@ function displayResults(weather){
     ${weather.current.wind_speed}mph
   `;
   hum.innerText = `${weather.current.humidity*100}%`;
-  precipitation.innerText =`${weather.current.dew_point*100} %`;
+  // precipitation.innerText =`${weather.current.dew_point*100} %`;
 
 
   let icon = weather.current.weather[0].icon;
   
   document.getElementById('weatherIcon').src = getICON(icon)
 
- 
-  dailyForecast(weather);
-  const daily = document.getElementById('dailyForecast').dailyForecast(weather.hourly);
-  const weekly =  document.getElementById('weeklyForecast').hourlyForecast(weather.daily);
+  // Render the forecasts tabs
+  document.getElementById('hourlyForecast').innerHTML = hourlyForecast(weather.hourly);
+  document.getElementById('dailyForecast').innerHTML = dailyForecast(weather.daily);
 
 }
 
 //LOCAL STORAGE
 
-
-function dailyForecast(fcData) {
+// get hourly forecast
+function hourlyForecast(fcData) {
   let resultHTML = `<tr>
-    <th>Day</th>
+    <th>Time</th>
+      <th>Conditions</th>
+      <th>Temp</th>
       <th>Humidity</th>
-      <th>Weather</th>
-      <th>Temperature</th>
-      <th>Wind speed</th>
-  </tr>`
+  </tr>`;
 
-  rowCount = fcData.length;
-  if (rowCount > 8) {
-    rowCount = 8;
-  }
+  let rowCount = fcData.length;
+  // if (rowCount > 8) {
+  //   rowCount = 8;
+  // }
 
-  for (let i = 0; i < rowCount.length; i++) {
-    let ts = new Date(fcData[i]);
-    
-  }
+  for (let i = 0; i < rowCount; i++) {
+    let ts = new Date(fcData[i].dt * 1000);
+    let summary = "";
+    let tempHigh = 0;
+    let timeValue;
 
-  let hours = ts.getHours();
-  if (hours > 0 && hours<= 12 ) {
-    timeValue = -- + hours;
-  } else {
-    
+    let hours = ts.getHours();
+
+    if (hours > 0 && hours <= 12) {
+      timeValue = "" + hours;
+    } else if (hours > 12) {
+      timeValue = "" + (hours - 12);
+    } else if(hours === 0) {
+      timeValue = "12";
+    }
+
+    timeValue += (hours > 12) ? " PM" : " AM"; //get AM/PM
+
+    summary = `${fcData[i].weather[0].description}
+     <img src="https://openweathermap.org/img/wn/${fcData[i].weather[0].icon}.png" > 
+    `;
+    tempHigh = `${Math.round(fcData[i].temp)}&deg`;
+    let humidity = `${Math.round(fcData[i].humidity)}%`;
+
+    resultHTML += renderRow(timeValue, summary, tempHigh, humidity);
+  
   }
 
   return resultHTML;
 }
 
-function hourlyForecast(fcData) {
-  
+function dailyForecast(fcData) {
+  let resultHTML = `<tr>
+    <th>Day</th>
+      <th>Conditions</th>
+      <th>Hi</th>
+      <th>Lo</th>
+  </tr>`;
+
+  let rowCount = fcData.length;
+  // if (rowCount > 8) {
+  //   rowCount = 8;
+  // }
+
+  for (let i = 0; i < rowCount; i++) {
+    let ts = new Date(fcData[i].dt * 1000);
+
+    let dayTime = dayBuilder(ts);
+    let summary = `${fcData[i].weather[0].description}
+     <img src="https://openweathermap.org/img/wn/${fcData[i].weather[0].icon}.png" > 
+    `;
+    let tempHigh = `${Math.round(fcData[i].temp.max)}&deg`;
+    let tempLow =  `${Math.round(fcData[i].temp.min)}&deg`;
+
+    resultHTML += renderRow(dayTime,summary,tempHigh, tempLow);
+  }
+
+  return resultHTML;
+
+}
+
+function renderRow(dayTime,summary,tempHigh, colVal4) {
+  return `<tr><td>${dayTime}</td><td>${summary} 
+  </td><td>${tempHigh}</td><td>${colVal4}</td></tr>`
 }
 
 function getICON(icon) {
@@ -163,9 +211,6 @@ function getICON(icon) {
       return 'assets/images/Rain.png'
     case iconValue.FEW_CLOUD:
       return 'assets/images/CloudyMoon.png'
-    // case iconValue.CLEAR:
-    //   return 'image/sunnyDay.png'
-    //   break;
     default:
      return 'assets/images/Rain.png'
   }

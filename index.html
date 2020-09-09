@@ -21,13 +21,18 @@
 <body>
   <nav>
     <header class="wpTitle">WEATHER ULTIMATE</header>
+    <!-- <div class="mobile-icon">
+    </div>
+    <ul class="primary-nav">
+      <li class="navbar"><a href="./pages/about.html">About</a></li>
+      <li class="navbar"><a href="./pages/contact.html">Contact</a></li>
+    </ul> -->
   </nav>
   <br>
   <div class="wpBackground">
     <main>
       <div class="row-content">
         <section class="main-container row-one" id="wpCurrent">
-          <p class="error">FindOut Your Desire Location Weather's Condition</p>
           <span class="search-bar">
             <i class="fa-fa-search"> </i>
             <input type="text" name="search" id="search" placeholder="Find your location..."
@@ -48,57 +53,41 @@
             <div class="current">
               <div class="temp"> 20 <span> &deg;c </span></div>
               <div class="weather">Clear</div>
-              
             </div>
             <hr>
             <h3 class="details">
               clear sky
             </h3>
+              <section class="more-details">
+                <td class="pre">232%</td>
+                <p class="hum">666%</p>
+                <p class="wind">777mph</p>
+              </section>
+            
           </article>
         </section>
         <section>
           <div class="row-two" >
-            <img id="weatherIcon" class="img-fluid weatherIcon" src="/images/MostlySunny.png">
+            <img id="weatherIcon" class="img-fluid weatherIcon" src="/assets/images/MostlySunny.png" alt="icon"> 
           </div>
         </section>
       </div>
       <div class="row-content-two">
-        <section class="more-details">
-          <table>
-            <thead>
-              <tr>
-                <th>Precipitation</th>
-                <th>Humidity</th>
-                <th>Winds</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="pre">232%</td>
-                <td class="hum">666%</td>
-                <td class="wind">777mph</td>
-              </tr>
-            </tbody>
-          </table>
-          </section>
-
         <section class="daily-hourly">
           <h1>Get Weakly and Daily Forecast here</h1>
             <div class="tab">
               <button class="tablinks" onclick="openCity(event, 'Hourly')">Hourly</button>
-              <button class="tablinks" onclick="openCity(event, 'Weekly')">Weakly</button>
+              <button class="tablinks" onclick="openCity(event, 'Daily')">Daily</button>
             </div>
             
             <!-- Tab content -->
             <div id="Hourly" class="tabcontent">
-              <h3>Hourly</h3>
               <table id="hourlyForecast">
 
               </table>
             </div>
             
-            <div id="Weekly" class="tabcontent">
-              <h3>Daily</h3>
+            <div id="Daily" class="tabcontent">
               <table id="dailyForecast">
 
               </table>
