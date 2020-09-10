@@ -21,20 +21,22 @@
 <body>
   <nav>
     <header class="wpTitle">WeatherX</header>
-    <!-- <div class="mobile-icon">
+    <div class="mobile-icon hambuger-wrapper" aria-label="open or close the menu" tabindex="0">
     </div>
     <ul class="primary-nav">
+      <li class="navbar"><a href="/index.html">Home</a></li>
       <li class="navbar"><a href="./pages/about.html">About</a></li>
       <li class="navbar"><a href="./pages/contact.html">Contact</a></li>
-    </ul> -->
+    </ul>
   </nav>
-  <br>
+  
     <main class="wpBackground">
       <div class="row-content">
         <section  id="wpCurrent">
           <span class="search-bar">
             <input type="text" name="search" id="search" placeholder="Find your location..."
               aria-label="Find your location">
+              <i class="fa fa-search " aria-hidden="true"></i>
             <botton class="btn" id="btn" >Find</botton>
           </span>
           <div>
@@ -43,14 +45,15 @@
           <article class="weather-details">
             <p class="error"></p>
             <div class="navbar navbar-first">
-              <header class="day">Monday</header>
-              <div class="date"> 1 Sept, 2020</div>
+              <header class="day"><!--Monday --> </header>
+              <div class="date"> <!-- 1 Sept, 2020 --></div>
             </div>
-            <h1 class="city">Benin City <br>
+            <i id="loader" class="fa fa-spinner fa-pulse fa-3x " aria-hidden="true"></i>
+            <h1 class="city"><!--Benin City --> <br>
             </h1>
-            <div class="timezone">Africa/Lagos</div>
+            <div class="timezone"> <!--Africa/Lagos --></div>
             <div class="current">
-              <div class="temp"> 20 <span> &deg;c </span></div>
+              <div class="temp"><!-- 20  --><span> <!-- &deg;c  --> </span></div>
               <div >
                 <p class="weather"></p>
                 <span class="img"> </span>
@@ -58,7 +61,8 @@
             </div>
             <hr>
             <h3 class="details">
-              clear sky
+              <!--clear sky -->
+              
             </h3>
               <section>
                 <table>
@@ -66,16 +70,21 @@
                     <tr>
                       <th>
                         <i class="fa fa-thermometer-half" aria-hidden="true"> </i>
-                        Humidity</th>
+                        Humidity 
+                      </th>
                       <th>
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                      Wind</th>
+                      <i class="fas fa-wind" aria-hidden="true"></i>
+                      Wind
+                    </th>
                     </tr>
                   </th>
                   <tr>
                     <td class="hum">
-                      666</td>
-                    <td class="wind">222</td>
+                      <!-- 666-->
+                    </td>
+                    <td class="wind">
+                      <!-- 222-->
+                    </td>
                   </tr>
                 </table>
               </section>
@@ -107,12 +116,18 @@
       </div>  
     </main>
   <footer>
-    hhh
-    <i class="fa fa-github" aria-hidden="true"></i>
+    <div>
+      <a href="https://github.com/Caesarsage"><i class="fa fa-github fa-pulse" aria-hidden="true"></i> Github</a>
+        &#124;
+      <a href="https://twitter.com/"><i class="fa fa-twitter fa-pulse"></i> Twitter</a>
+    </div>
+    <div>
 
-  </footer>
+    </div>
+    </footer>
 
   <script src="js/app.js"></script>
   <script src="js/script.js"></script>
+  <script src="/js/toggle.js"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@ const hum = document.querySelector('.hum');
 const wind = document.querySelector('.wind');
 const imgIcon = document.querySelector('.img');
 const error = document.querySelector('.error');
+const loader = document.querySelector('#loader');
 
 const api ={
   weatherkey: '8ff7422f47efdacccce3e0c8dac5bbed',
@@ -40,8 +41,11 @@ function getLonLat(query) {
       return forecast.json();
     })
     .then(
+      loader.style.visibility = "visible",
       getForecast,
     ).catch( err => {
+      loader.style.visibility = "hidden",
+      error.innerText = 'Sorry An Error Occur.Try Again!!!'
       console.log(err)
     }
   )
@@ -53,7 +57,6 @@ function getForecast(forecast) {
   const displayName = forecast[0].display_name;
   console.log( ' ' + lat +' ' + lon);
   getResults(lat,lon, displayName)
-
 }
 
 function getResults(lat,lon, displayName){
@@ -63,11 +66,12 @@ function getResults(lat,lon, displayName){
     })
     .then(
       displayResults,
+      loader.style.visibility = "hidden",
       city.innerText = displayName
     ).catch( err=>{
       error.innerText = 'Sorry An Error Occur.Try Again!!!'
       console.log(err) 
-    });
+    })
 }
 
 function displayResults(weather){

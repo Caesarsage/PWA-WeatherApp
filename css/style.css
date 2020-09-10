@@ -26,30 +26,41 @@ body{
 }
 
 /*============= navbar============== */
-nav .wpTitle {
+  
+nav {
   position: fixed;
+  text-align: center;
   font-family: titling-gothic-fb-wide, sans-serif;
+  background: linear-gradient(to right, rgb(121, 145, 187), rgb(174, 201, 248), rgb(148, 186, 252)); 
+  width: 100vw;
+}
+.wpTitle{
   font-weight: 700;
   font-style: normal;
   font-size: 1.5em;
-  text-align: center;
-  background: linear-gradient(to right, rgb(121, 145, 187), rgb(174, 201, 248), rgb(148, 186, 252)); 
-  width: 100vw;
   color: var(--CFColors-darkGrey-rgba);
   -webkit-text-fill-color: var(--CFColors-white);
   /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1.5px;
   -webkit-text-stroke-color: var(--CFColors-darkGrey-rgba);
 }
-
-.loader{
-  display: none;
+.primary-nav{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 6em;
+  padding-bottom: 0.5em;
 }
-
+li{
+  padding:5px 10px 0 ;
+  list-style-type: none;
+  border-right: 1px solid white;
+}
+a{
+  text-decoration: none;
+}
 /* Body */
-
 .wpBackground {
-  margin-top: 1px;
+  margin-top: 3%;
   height: 100vh;
   min-height: 500px;
   background: url(/assets/images/WeatherPrpBG.png) no-repeat center center fixed;
@@ -61,7 +72,6 @@ nav .wpTitle {
   justify-content: space-around;
   flex-wrap: wrap;
 }
-
 .row-content{
   border-radius: 5px;
 }
@@ -75,7 +85,6 @@ nav .wpTitle {
   position: relative;
   top: 81px;
 }
-
 .search-bar input{
   padding: 10px 15px 10px 0;
   border: none;
@@ -85,7 +94,6 @@ nav .wpTitle {
   font-size:20px;
   transition: 0.2s ease-in-out all;
 }
-
 .search-bar input:focus{
   background-color: rgba(63, 67, 73,0.3);
   font-style: italic;
@@ -142,6 +150,7 @@ nav .wpTitle {
 table{
   border-collapse: collapse;
   width:-webkit-fill-available;
+  overflow-wrap: anywhere;
 }
 td, th {
   border: 1px solid rgba(0, 115, 171, .5);
@@ -176,7 +185,24 @@ tr:nth-child(even){
   border-bottom: 4px solid #fff;
   outline: none;
 }
-
+.form-group{
+  padding: 10px;
+}
+.form-group input,
+.form-group textarea{
+  border: none;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+}
+.form-group textarea{
+  border-top: 1px solid white;
+}
+button{
+ padding:10px;
+ border-radius: 5px;
+ background-color: var(--CFColors-grayBlue-rgba); 
+}
 /* Style the buttons that are used to open the tab content */
 .tab button {
   background-color: inherit;
@@ -211,6 +237,22 @@ tr:nth-child(even){
   animation: fadeEffect 1s; /* Fading effect takes 1 second */
 }
 
+#loader{
+  visibility: hidden;
+}
+
+
+@-webkit-keyframes spin{
+  0% { -webkit-transform: rotate(0deg);}
+  100% { -webkit-transform: rotate(360deg);}
+}
+@keyframes spin{
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+
+
 /* Go from zero to full opacity */
 @keyframes fadeEffect {
   from {opacity: 0;}
@@ -225,6 +267,7 @@ tr:nth-child(even){
   #wpCurrent,
   #wpConditions {
       font-size: 1.5em;
+      margin-top: 2pc;
   }
 }
 
@@ -238,8 +281,8 @@ tr:nth-child(even){
   #wpConditions {
       font-size: 1.5em;
   }
-
 }
+
 @media all and (max-width: 850px){
   .row-content{
     margin-top: 97px;
@@ -258,6 +301,10 @@ tr:nth-child(even){
     width: 100%;
     top: 41px;
   }
+  .search-bar .btn{
+    display: none;
+  }
+  
 
 }
 
@@ -273,17 +320,41 @@ tr:nth-child(even){
   }
   .search-bar input{
     margin: -57px;
+  }  
+ .mobile-icon {
+    background: url(/assets/images/icon-hamburger.svg) no-repeat right;
+    cursor: pointer;
+    margin-top: -23px;
+    margin-right: 34px;
+    padding-top: 2em;
   }
+ 
+/* BY DEFAULT HIDE LINKS */
+.primary-nav {
+    height: 0;
+    overflow: hidden;
+} 
+/* TOGGLE CLASS */
+.show-links {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  left: 0;
+  top: 40px;
+  font-weight: 900;
+  transition: all .2s linear; 
+  height: 82px;
+  }
+
 }
+
 @media all and (max-width: 700px){
   .row-content{
     width: 123vw;
   }
-  ul{
-    display: none;
-  }
-  
-  .search-bar .btn{
-    display: none;
+}
+@media all and (max-width: 350px){
+  .fa-search{
+    display: none!important;
   }
 }
