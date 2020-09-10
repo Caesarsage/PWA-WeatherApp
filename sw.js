@@ -22,11 +22,15 @@ self.addEventListener('install', e =>{
 //activate
 self.addEventListener('activate', e => {
   // console.log('service worker has been activated');
-  // e.waitUntil(
-  //   caches.keys().then(keys =>{
-  //     console.log(keys);
-  //   })
-  // )
+  e.waitUntil(
+    caches.keys().then(keys =>{
+      // console.log(keys);
+      return Promise.all(keys
+        .filter(key => key !== staticCacheName)
+        .map(key => caches.delete(key))
+      )
+    })
+  )
 });
 
 //fetch
