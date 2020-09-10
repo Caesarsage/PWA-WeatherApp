@@ -15,12 +15,12 @@
   <meta name="theme-color" content="#34495e">
 
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="/assets/images/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css">
   <title>Weather Application</title>
 </head>
 <body>
   <nav>
-    <header class="wpTitle">WEATHER ULTIMATE</header>
+    <header class="wpTitle">WeatherX</header>
     <!-- <div class="mobile-icon">
     </div>
     <ul class="primary-nav">
@@ -29,12 +29,10 @@
     </ul> -->
   </nav>
   <br>
-  <div class="wpBackground">
-    <main>
+    <main class="wpBackground">
       <div class="row-content">
-        <section class="main-container row-one" id="wpCurrent">
+        <section  id="wpCurrent">
           <span class="search-bar">
-            <i class="fa-fa-search"> </i>
             <input type="text" name="search" id="search" placeholder="Find your location..."
               aria-label="Find your location">
             <botton class="btn" id="btn" >Find</botton>
@@ -43,6 +41,7 @@
             
           </div>
           <article class="weather-details">
+            <p class="error"></p>
             <div class="navbar navbar-first">
               <header class="day">Monday</header>
               <div class="date"> 1 Sept, 2020</div>
@@ -52,26 +51,38 @@
             <div class="timezone">Africa/Lagos</div>
             <div class="current">
               <div class="temp"> 20 <span> &deg;c </span></div>
-              <div class="weather">Clear</div>
+              <div >
+                <p class="weather"></p>
+                <span class="img"> </span>
+              </div>
             </div>
             <hr>
             <h3 class="details">
               clear sky
             </h3>
-              <section class="more-details">
-                <td class="pre">232%</td>
-                <p class="hum">666%</p>
-                <p class="wind">777mph</p>
+              <section>
+                <table>
+                  <th>
+                    <tr>
+                      <th>
+                        <i class="fa fa-thermometer-half" aria-hidden="true"> </i>
+                        Humidity</th>
+                      <th>
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                      Wind</th>
+                    </tr>
+                  </th>
+                  <tr>
+                    <td class="hum">
+                      666</td>
+                    <td class="wind">222</td>
+                  </tr>
+                </table>
               </section>
-            
           </article>
         </section>
-        <section>
-          <div class="row-two" >
-            <img id="weatherIcon" class="img-fluid weatherIcon" src="/assets/images/MostlySunny.png" alt="icon"> 
-          </div>
-        </section>
       </div>
+
       <div class="row-content-two">
         <section class="daily-hourly">
           <h1>Get Weakly and Daily Forecast here</h1>
@@ -95,10 +106,12 @@
         </section>
       </div>  
     </main>
-  </div>
   <footer>
+    kkk
+    <i class="fa fa-search" aria-hidden="true"></i>
 
   </footer>
+
   <script src="js/app.js"></script>
   <script src="js/script.js"></script>
 </body>

@@ -11,6 +11,7 @@
   "author": "caesarsage",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.3.0"
+    "lite-server": "^2.3.0",
+    "font-awesome": "^4.7.0" 
   }
 }

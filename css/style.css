@@ -47,10 +47,7 @@ nav .wpTitle {
 }
 
 /* Body */
-main{
-  padding: 0 3em;
-  height: 100%;
- }
+
 .wpBackground {
   margin-top: 1px;
   height: 100vh;
@@ -60,18 +57,19 @@ main{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  
-}
-.row-content{
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
+}
+
+.row-content{
   border-radius: 5px;
 }
 #wpCurrent {
   background-color: var(--CFColors-grayBlue-rgba);
   color: var(--CFColors-white);
   resize: vertical;
-  width: 60%;
+  padding: 0 4em;
 }
 .search-bar{
   position: relative;
@@ -79,8 +77,7 @@ main{
 }
 
 .search-bar input{
-  width: 53%;
-  padding: 10px 15px;
+  padding: 10px 15px 10px 0;
   border: none;
   outline: none;
   background-color: rgb(63, 67, 73);
@@ -109,11 +106,6 @@ main{
   flex-wrap: wrap;
   padding: 75px 10px 0 10px;
   justify-content: space-between;
-}
-#weatherIcon {
-  max-width: 100%;
-  width: 301px;
-  height: auto;
 }
 .date{
   padding-right: 16px;
@@ -172,6 +164,7 @@ tr:nth-child(even){
   justify-content: space-between;
   margin-top: 20px;
   flex-wrap: wrap;
+ 
 }
 .daily-hourly h1{
   background-color: var( --CfColors-darkBlue-rgba);
@@ -180,7 +173,6 @@ tr:nth-child(even){
   border-radius: 5px;
 }
 .tab {
-  overflow: scroll;
   border-bottom: 4px solid #fff;
   outline: none;
 }
@@ -208,7 +200,7 @@ tr:nth-child(even){
 
 /* Style the tab content */
 .tabcontent {
-  width: 80vw;
+  /* width: ; */
   display: none;
   padding: 6px 12px;
   border: 1px solid #ccc;
@@ -278,6 +270,9 @@ tr:nth-child(even){
   }
   .current{
     text-align: center;
+  }
+  .search-bar input{
+    margin: -57px;
   }
 }
 @media all and (max-width: 700px){

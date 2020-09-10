@@ -1,5 +1,4 @@
 'use strict'
-// import { api } from "./api";
 
 const searchBar = document.getElementById('search');
 const findBtn = document.querySelector('.btn');
@@ -11,27 +10,16 @@ const timeZone = document.querySelector('.timezone');
 const day = document.querySelector('.day');
 const erroMessage = document.querySelector('.error');
 const details = document.querySelector('.details');
-const precipitation = document.querySelector('.pre');
 const hum = document.querySelector('.hum');
 const wind = document.querySelector('.wind');
-
-let iconValue = {
-  CLEAR: 'day-sunny',
-  FEW_CLOUD: 'day-cloud',
-  SCATTERED_CLOUDS: 'night-alt-clouds',
-  BROKEN_CLOUDS: 'day-clouds',
-  SHOWER_RAIN: 'shower rain',
-  RAIN : 'day-rain',
-  THUNDERSTORM : 'day-thunderstorm',
-  SNOW : 'snow',
-  MIST: 'fog'
-}
+const imgIcon = document.querySelector('.img');
+const error = document.querySelector('.error');
 
 const api ={
-  key: '8ff7422f47efdacccce3e0c8dac5bbed',
-  base: 'https://api.openweathermap.org/data/2.5/',
-  key2: 'bbeb2ada24fec4',
-  base2: 'https://us1.locationiq.com/v1/search.php?'
+  weatherkey: '8ff7422f47efdacccce3e0c8dac5bbed',
+  weatherbase: 'https://api.openweathermap.org/data/2.5/',
+  geocodekey: 'bbeb2ada24fec4',
+  geocodebase: 'https://us1.locationiq.com/v1/search.php?'
 }
 
 searchBar.addEventListener('keypress', setQuery, false);
@@ -47,7 +35,7 @@ function setQuery(event) {
 }
 
 function getLonLat(query) {
-  fetch(`${api.base2}key=${api.key2}&q=${query}&format=json`)
+  fetch(`${api.geocodebase}key=${api.geocodekey}&q=${query}&format=json`)
     .then( forecast =>{
       return forecast.json();
     })
@@ -69,8 +57,7 @@ function getForecast(forecast) {
 }
 
 function getResults(lat,lon, displayName){
-  // api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
-  fetch(`${api.base}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely&appid=${api.key}`)
+  fetch(`${api.weatherbase}onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely&appid=${api.weatherkey}`)
     .then(weather => {
        return weather.json();
     })
@@ -78,37 +65,25 @@ function getResults(lat,lon, displayName){
       displayResults,
       city.innerText = displayName
     ).catch( err=>{
+      error.innerText = 'Sorry An Error Occur.Try Again!!!'
       console.log(err) 
     });
 }
 
 function displayResults(weather){
   console.log(weather);
-
   let now = new Date();
 
   day.innerText = dayBuilder(now);
   date.innerText = dateBuilder(now);
-
-  temp.innerHTML = `
-    ${Math.round(weather.current.temp).toFixed()}<span> &deg;c </span>
-  `;
-
+  temp.innerHTML = `${Math.round(weather.current.temp).toFixed()}<span> &deg;c </span>`;
   weatherV.innerText = weather.current.weather[0].main;
   details.innerText = weather.current.weather[0].description;
-
   timeZone.innerText = weather.timezone;
-  wind.innerText = `
-    ${weather.current.wind_speed}mph
-  `;
+  wind.innerText = `${weather.current.wind_speed}mph`;
   hum.innerText = `${weather.current.humidity*100}%`;
-  // precipitation.innerText =`${weather.current.dew_point*100} %`;
-
-
-  let icon = weather.current.weather[0].icon;
-  
-  document.getElementById('weatherIcon').src = getICON(icon)
-
+  imgIcon.innerHTML = `  
+    <img src="https://openweathermap.org/img/wn/${weather.current.weather[0].icon}2@.png" alt='icon'> `;  
   // Render the forecasts tabs
   document.getElementById('hourlyForecast').innerHTML = hourlyForecast(weather.hourly);
   document.getElementById('dailyForecast').innerHTML = dailyForecast(weather.daily);
@@ -150,7 +125,7 @@ function hourlyForecast(fcData) {
     timeValue += (hours > 12) ? " PM" : " AM"; //get AM/PM
 
     summary = `${fcData[i].weather[0].description}
-     <img src="https://openweathermap.org/img/wn/${fcData[i].weather[0].icon}.png" > 
+     <img src="https://openweathermap.org/img/wn/${fcData[i].weather[0].icon}.png" alt='icon> 
     `;
     tempHigh = `${Math.round(fcData[i].temp)}&deg`;
     let humidity = `${Math.round(fcData[i].humidity)}%`;
@@ -196,26 +171,6 @@ function renderRow(dayTime,summary,tempHigh, colVal4) {
   return `<tr><td>${dayTime}</td><td>${summary} 
   </td><td>${tempHigh}</td><td>${colVal4}</td></tr>`
 }
-
-function getICON(icon) {
-  switch (icon) {
-    case iconValue.CLEAR:
-      return 'assets/images/sunnyDay.png'
-    case iconValue.SCATTERED_CLOUDS:
-    case iconValue.BROKEN_CLOUDS:
-      return 'assets/images/CloudyMoon.png'
-    case iconValue.SNOW:
-      return 'assets/images/Snow.png'
-    case iconValue.THUNDERSTORM:
-    case iconValue.RAIN:
-      return 'assets/images/Rain.png'
-    case iconValue.FEW_CLOUD:
-      return 'assets/images/CloudyMoon.png'
-    default:
-     return 'assets/images/Rain.png'
-  }
-}
-
 function dayBuilder(now) {
   let days = [
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
