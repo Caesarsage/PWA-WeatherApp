@@ -6,7 +6,8 @@ const assets = [
   '/js/app.js',
   '/js/script.js',
   '/css/style.css',
-  '/assets/images/WeatherPrpBG.png'
+  '/assets/images/WeatherPrpBG.png',
+  '/pages/fallback.html'
 ];
 
 //install service worker
@@ -45,6 +46,6 @@ self.addEventListener('fetch', e => {
           return fetchRes;
         })
       });
-    })
+    }).catch(() => caches.match('/pages/fallback.html'))
   );
 });
