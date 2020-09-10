@@ -1,5 +1,5 @@
-const staticCacheName = 'site-static-v5';
-const dynamicCacheName = 'site-dynamic-v2';
+const staticCacheName = 'site-static-v0';
+const dynamicCacheName = 'site-dynamic-v0';
 const assets = [
   '/',
   '/index.html',
@@ -8,7 +8,11 @@ const assets = [
   '/js/toggle.js',
   '/css/style.css',
   '/assets/images/WeatherPrpBG.png',
-  '/pages/fallback.html'
+  '/assets/images/icon-hamburger.svg',
+  '/assets/images/icon-close.svg',
+  '/pages/fallback.html',
+  '/node_modules/font-awesome/css/font-awesome.min.css',
+  '/node_modules/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0'
 ];
 
 // cache size limit function
@@ -60,7 +64,7 @@ self.addEventListener('fetch', e => {
         })
       });
     }).catch(() => {
-      if (e,request.url.indexOf('.html') > -1) {
+      if (e.request.url.indexOf('.html') > -1) {
         return caches.match('/pages/fallback.html');
       }
     })
