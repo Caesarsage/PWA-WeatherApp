@@ -10,6 +10,17 @@ const assets = [
   '/pages/fallback.html'
 ];
 
+// cache size limit function
+const limitCachesize = (name, size) =>{
+  caches.open(name).then(caches =>{
+    caches.keys().then(keys =>{
+      if(keys.length > size){
+        caches.delete(keys[0]).then(limitCachesize(name, size));
+      }
+    })
+  })
+};
+
 //install service worker
 self.addEventListener('install', e =>{  
   //console.log('service worker have been install');
@@ -43,6 +54,7 @@ self.addEventListener('fetch', e => {
       return cacheRes || fetch(e.request).then(fetchRes =>{
         return caches.open(dynamicCacheName).then(caches =>{
           caches.put(e.request.url, fetchRes.clone());
+          limitCachesize(dynamicCacheName, 3);
           return fetchRes;
         })
       });
