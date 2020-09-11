@@ -30,7 +30,7 @@ body{
 nav {
   position: fixed;
   text-align: center;
-  font-family: titling-gothic-fb-wide, sans-serif;
+  font-family:sans-serif;
   background: linear-gradient(to right, rgb(121, 145, 187), rgb(174, 201, 248), rgb(148, 186, 252)); 
   width: 100vw;
 }
@@ -40,7 +40,6 @@ nav {
   font-size: 1.5em;
   color: var(--CFColors-darkGrey-rgba);
   -webkit-text-fill-color: var(--CFColors-white);
-  /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1.5px;
   -webkit-text-stroke-color: var(--CFColors-darkGrey-rgba);
 }
@@ -63,7 +62,7 @@ a{
   margin-top: 3%;
   height: 100vh;
   min-height: 500px;
-  background: url(/assets/images/WeatherPrpBG.png) no-repeat center center fixed;
+  background: url(../assets/images/weather2.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -322,11 +321,12 @@ button{
     margin: -57px;
   }  
  .mobile-icon {
-    background: url(/assets/images/icon-hamburger.svg) no-repeat right;
+    background: url(../assets/images/icon-hamburger.svg) no-repeat right;
     cursor: pointer;
     margin-top: -23px;
     margin-right: 34px;
     padding-top: 2em;
+    border: none;
   }
  
 /* BY DEFAULT HIDE LINKS */
@@ -344,6 +344,7 @@ button{
   font-weight: 900;
   transition: all .2s linear; 
   height: 82px;
+  border: none;
   }
 
 }

@@ -1,19 +1,19 @@
-const staticCacheName = 'site-static-v023';
-const dynamicCacheName = 'site-dynamic-v024';
+const staticCacheName = 'site-static-v08';
+const dynamicCacheName = 'site-dynamic-v3';
+
 const assets = [
   '/',
   '/index.html',
-  '/js/app.js',
   '/js/script.js',
+  '/js/app.js',
   '/js/toggle.js',
   '/css/style.css',
-  '/assets/images/WeatherPrpBG.png',
+  '/css/font-awesome.min.css',
   '/assets/images/icon-hamburger.svg',
   '/assets/images/icon-close.svg',
+  '/assets/images/weather2.jpg',
   '/pages/fallback.html',
-  '/node_modules/font-awesome/css/font-awesome.min.css',
-  '/node_modules/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0'
-];
+  ];
 
 // cache size limit function
 const limitCachesize = (name, size) =>{
