@@ -41,8 +41,8 @@ function getLonLat(query) {
       return forecast.json();
     })
     .then(
-      loader.style.visibility = "visible",
       getForecast,
+      loader.style.visibility = "visible"
     ).catch( err => {
       loader.style.visibility = "hidden",
       error.innerText = 'Sorry An Error Occur.Try Again!!!'
@@ -87,7 +87,7 @@ function displayResults(weather){
   wind.innerText = `${weather.current.wind_speed}mph`;
   hum.innerText = `${weather.current.humidity*100}%`;
   imgIcon.innerHTML = `  
-    <img src="https://openweathermap.org/img/wn/${weather.current.weather[0].icon}2@.png" alt='icon'> `;  
+    <img src="https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png" alt='icon'> `;  
   // Render the forecasts tabs
   document.getElementById('hourlyForecast').innerHTML = hourlyForecast(weather.hourly);
   document.getElementById('dailyForecast').innerHTML = dailyForecast(weather.daily);
