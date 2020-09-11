@@ -68,6 +68,7 @@ function getResults(lat,lon, displayName){
       displayResults,
       loader.style.visibility = "hidden",
       city.innerText = displayName
+      error.style.visibility = "hidden"
     ).catch( err=>{
       error.innerText = 'Sorry An Error Occur.Try Again!!!'
       console.log(err) 
